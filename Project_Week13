@@ -1,0 +1,46 @@
+#EC2 random name generator for week 13 in LUIT
+
+import random
+import string
+import datetime
+currentTime = datetime.datetime.now()
+currentTime.hour
+
+#Will add the appropriate greeting for time of day.   
+
+if currentTime.hour < 12 :
+     print('Good morning, Welcome to LUIT!')
+if currentTime.hour > 12 :
+     print('Good afternoon Welcome to LUIT')
+if currentTime.hour > 6 :
+     print('Good evening, Welcome to LUIT')
+
+#Shows the Departments that are approved to create Instances
+Approved_Departments = ["marketing", "accounting", "finops", "Marketing", "Accounting", "FinOps"]
+
+print ("This program will generate a random name for your EC2 instances\n")
+
+
+Department = input("Please enter the the Approved Department:\n") 
+
+#Logic for verifying use is in correct group
+if Department in Approved_Departments:
+    
+    Instance = input("How many EC2 instances will be needed?:\n")
+    
+else:
+    print("Department not Authorized!  Only Avialable for Marketing, Accounting, and FinOps Departments\n")
+    exit()
+
+#If correct Access is granted, we get message regarding # of EC2s
+if Instance.isnumeric():
+    print("Access Granted for", Department, "Department!", "How many instances will be needed?", Instance, "instances.\n")
+    Instance= int(Instance)
+
+#Will generate random 6 character name for instances
+Instance_Names = ''.join(random.choices (string.ascii_letters + string.digits, k=6))
+
+#Concatenate department name and random characters
+for _ in range(Instance):
+    print("Instances:")
+    print((Department + "-" + Instance_Names),"\n")
